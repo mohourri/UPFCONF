@@ -1,0 +1,48 @@
+﻿@model IEnumerable<UPFCONF.Models.Comite>
+
+@{
+    ViewBag.Title = "Comités";
+}
+
+<h2>Comités</h2>
+
+<p>
+    <a href="@Url.Action("Create")" class="btn btn-primary rounded">Nouvelle Comité</a>
+</p>
+<table class="table table-striped">
+    <tr>
+        @*<th>
+                @Html.DisplayNameFor(model => model.ID_Comite)
+            </th>*@
+        <th>
+            Titre Congres
+        </th>
+        <th>
+            Nom Comites
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.President)
+        </th>
+        <th></th>
+    </tr>
+
+    @foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.Congre.Titre)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Nom_Comite)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.President)
+        </td>
+        <td>
+            <button onclick="location.href='@Url.Action("Edit", new { id = item.ID_Comite })'" class="btn btn-primary">Edit</button>
+            <button onclick="location.href='@Url.Action("Details", new { id = item.ID_Comite })'" class="btn btn-info">Details</button>
+            <button onclick="location.href='@Url.Action("Delete", new { id = item.ID_Comite })'" class="btn btn-danger">Delete</button>
+        </td>
+    </tr>
+    }
+
+</table>

@@ -1,0 +1,88 @@
+﻿@model UPFCONF.Models.Session
+
+@{
+    ViewBag.Title = "Create";
+}
+
+
+<h2>Nouvelle Session</h2>
+
+
+@using (Html.BeginForm())
+{
+    @Html.AntiForgeryToken()
+<div class="form-horizontal">
+    <hr />
+    @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+    @* <div class="form-group">
+            @Html.LabelFor(model => model.ID_Session, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.ID_Session, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.ID_Session, "", new { @class = "text-danger" })
+            </div>
+        </div>*@
+
+    <div class="form-group">
+        <label class="control-label col-md-2">Congrès</label>
+        <div class="col-md-10">
+            @Html.DropDownListFor(model => model.ID_Congres, new SelectList(ViewBag.CongressList, "ID_Congres", "Titre"), "-- Selectionnez un Congrès  --", new { @class = "form-control" })
+            @Html.ValidationMessageFor(model => model.ID_Congres, "", new { @class = "text-danger" })
+        </div>
+    </div>
+
+    <div class="form-group">
+        <label class="control-label col-md-2">Nom Session</label>
+        <div class="col-md-10">
+            @Html.EditorFor(model => model.Nom_Session, new { htmlAttributes = new { @class = "form-control" } })
+            @Html.ValidationMessageFor(model => model.Nom_Session, "", new { @class = "text-danger" })
+        </div>
+    </div>
+
+    <div class="form-group">
+        @Html.LabelFor(model => model.Responsable, htmlAttributes: new { @class = "control-label col-md-2" })
+        <div class="col-md-10">
+            @Html.EditorFor(model => model.Responsable, new { htmlAttributes = new { @class = "form-control" } })
+            @Html.ValidationMessageFor(model => model.Responsable, "", new { @class = "text-danger" })
+        </div>
+    </div>
+
+    <div class="form-group">
+        @Html.LabelFor(model => model.Salle, htmlAttributes: new { @class = "control-label col-md-2" })
+        <div class="col-md-10">
+            @Html.EditorFor(model => model.Salle, new { htmlAttributes = new { @class = "form-control" } })
+            @Html.ValidationMessageFor(model => model.Salle, "", new { @class = "text-danger" })
+        </div>
+    </div>
+    <div class="form-group">
+        <label class="control-label col-md-2">Heure Début</label>
+        <div class="col-md-10">
+            @Html.TextBoxFor(model => model.Heure_Debut, "{0:HH:mm}", new { @class = "form-control", type = "time" })
+            @Html.ValidationMessageFor(model => model.Heure_Debut, "", new { @class = "text-danger" })
+        </div>
+    </div>
+
+    <div class="form-group">
+        <label class="control-label col-md-2">Heure Fin</label>
+        <div class="col-md-10">
+            @Html.TextBoxFor(model => model.Heure_Fin, "{0:HH:mm}", new { @class = "form-control", type = "time" })
+            @Html.ValidationMessageFor(model => model.Heure_Fin, "", new { @class = "text-danger" })
+        </div>
+    </div>
+
+
+
+    <div class="form-group">
+        <div class="col-md-offset-2 col-md-10">
+            <input type="submit" value="Ajouter" class="btn btn-default" />
+        </div>
+    </div>
+</div>
+}
+
+<div>
+    @Html.ActionLink("< Retour a la liste", "Index")
+</div>
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+}

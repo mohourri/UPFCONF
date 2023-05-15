@@ -1,0 +1,70 @@
+﻿@model IEnumerable<UPFCONF.Models.Session>
+
+@{
+    ViewBag.Title = "Sessions";
+}
+
+<h2>Sessions</h2>
+
+<p>
+    <a href="@Url.Action("Create")" class="btn btn-primary rounded">Nouvelle Session</a>
+
+</p>
+<table class="table table-striped">
+    <tr>
+        @*<th>
+            @Html.DisplayNameFor(model => model.ID_Session)
+        </th>*@
+        <th>
+           Congres
+        </th>
+        <th>
+            Nom Session
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Responsable)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Salle)
+        </th>
+        <th>
+            Heure Debut
+        </th>
+        <th>
+            Heure Fin
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        @*<td>
+            @Html.DisplayFor(modelItem => item.ID_Session)
+        </td>*@
+        <td>
+            @Html.DisplayFor(modelItem => item.Congre.Titre)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Nom_Session)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Responsable)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Salle)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Heure_Debut)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Heure_Fin)
+        </td>
+        <td>
+            <button onclick="location.href='@Url.Action("Edit", new { id = item.ID_Session })'" class="btn btn-primary">Edit</button>
+            <button onclick="location.href='@Url.Action("Details", new { id = item.ID_Session })'" class="btn btn-info">Details</button>
+            <button onclick="location.href='@Url.Action("Delete", new { id = item.ID_Session })'" class="btn btn-danger">Delete</button>
+        </td>
+    </tr>
+}
+
+</table>

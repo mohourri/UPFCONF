@@ -1,0 +1,66 @@
+﻿@model UPFCONF.Models.Congre
+
+@{
+    ViewBag.Title = "Details";
+}
+
+<h2>Details</h2>
+
+<div>
+    <h4>Congre</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.ID_Congres)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.ID_Congres)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Titre)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Titre)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Date_Debut)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Date_Debut)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Date_Fin)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Date_Fin)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Organisateur)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Organisateur)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Lieu)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Lieu)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { /* id = Model.PrimaryKey */ }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>

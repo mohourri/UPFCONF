@@ -1,0 +1,50 @@
+﻿@model UPFCONF.Models.Presentation
+
+@{
+    ViewBag.Title = "Details";
+}
+
+<h2>Details</h2>
+
+<div>
+    <h4>Presentation</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.ID_Presentation)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.ID_Presentation)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.ID_Session)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.ID_Session)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Nom_Conferencier)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Nom_Conferencier)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Sujet)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Sujet)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { /* id = Model.PrimaryKey */ }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>

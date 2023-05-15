@@ -1,0 +1,514 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+      <Schema Namespace="APP_DB.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="Administrateur">
+          <Key>
+            <PropertyRef Name="ID_Administrateur" />
+          </Key>
+          <Property Name="ID_Administrateur" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Nom" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="Prenom" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="Email" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="Mot_De_Passe" Type="varchar" MaxLength="50" Nullable="false" />
+        </EntityType>
+        <!--Errors Found During Generation:
+warning 6002: The table/view 'upfcon.dbo.Autorisation_Admin' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+        <EntityType Name="Autorisation_Admin">
+          <Key>
+            <PropertyRef Name="ID_Administrateur" />
+            <PropertyRef Name="Autorisation" />
+          </Key>
+          <Property Name="ID_Administrateur" Type="int" Nullable="false" />
+          <Property Name="Autorisation" Type="varchar" MaxLength="50" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Comite">
+          <Key>
+            <PropertyRef Name="ID_Comite" />
+          </Key>
+          <Property Name="ID_Comite" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="ID_Congres" Type="int" Nullable="false" />
+          <Property Name="Nom_Comite" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="President" Type="varchar" MaxLength="50" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Congres">
+          <Key>
+            <PropertyRef Name="ID_Congres" />
+          </Key>
+          <Property Name="ID_Congres" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Titre" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="Date_Debut" Type="date" Nullable="false" />
+          <Property Name="Date_Fin" Type="date" Nullable="false" />
+          <Property Name="Organisateur" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="Lieu" Type="varchar" MaxLength="50" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Participant">
+          <Key>
+            <PropertyRef Name="ID_Participant" />
+          </Key>
+          <Property Name="ID_Participant" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Nom" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="Prenom" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="Email" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="Mot_De_Passe" Type="varchar" MaxLength="50" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Participation">
+          <Key>
+            <PropertyRef Name="ID_Participation" />
+          </Key>
+          <Property Name="ID_Participation" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="ID_Participant" Type="int" Nullable="false" />
+          <Property Name="ID_Session" Type="int" Nullable="false" />
+          <Property Name="Date_Participation" Type="date" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Presentation">
+          <Key>
+            <PropertyRef Name="ID_Presentation" />
+          </Key>
+          <Property Name="ID_Presentation" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="ID_Session" Type="int" Nullable="false" />
+          <Property Name="Nom_Conferencier" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="Sujet" Type="varchar" MaxLength="50" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Session">
+          <Key>
+            <PropertyRef Name="ID_Session" />
+          </Key>
+          <Property Name="ID_Session" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="ID_Congres" Type="int" Nullable="false" />
+          <Property Name="Nom_Session" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="Responsable" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="Salle" Type="varchar" MaxLength="10" Nullable="false" />
+          <Property Name="Heure_Debut" Type="time" Precision="7" Nullable="false" />
+          <Property Name="Heure_Fin" Type="time" Precision="7" Nullable="false" />
+        </EntityType>
+        <Association Name="FK__Autorisat__ID_Ad__37A5467C">
+          <End Role="Administrateur" Type="Self.Administrateur" Multiplicity="1" />
+          <End Role="Autorisation_Admin" Type="Self.Autorisation_Admin" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Administrateur">
+              <PropertyRef Name="ID_Administrateur" />
+            </Principal>
+            <Dependent Role="Autorisation_Admin">
+              <PropertyRef Name="ID_Administrateur" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Comite__ID_Congr__267ABA7A">
+          <End Role="Congres" Type="Self.Congres" Multiplicity="1" />
+          <End Role="Comite" Type="Self.Comite" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Congres">
+              <PropertyRef Name="ID_Congres" />
+            </Principal>
+            <Dependent Role="Comite">
+              <PropertyRef Name="ID_Congres" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Participa__ID_Pa__31EC6D26">
+          <End Role="Participant" Type="Self.Participant" Multiplicity="1" />
+          <End Role="Participation" Type="Self.Participation" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Participant">
+              <PropertyRef Name="ID_Participant" />
+            </Principal>
+            <Dependent Role="Participation">
+              <PropertyRef Name="ID_Participant" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Participa__ID_Se__32E0915F">
+          <End Role="Session" Type="Self.Session" Multiplicity="1" />
+          <End Role="Participation" Type="Self.Participation" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Session">
+              <PropertyRef Name="ID_Session" />
+            </Principal>
+            <Dependent Role="Participation">
+              <PropertyRef Name="ID_Session" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Presentat__ID_Se__2C3393D0">
+          <End Role="Session" Type="Self.Session" Multiplicity="1" />
+          <End Role="Presentation" Type="Self.Presentation" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Session">
+              <PropertyRef Name="ID_Session" />
+            </Principal>
+            <Dependent Role="Presentation">
+              <PropertyRef Name="ID_Session" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Session__ID_Cong__29572725">
+          <End Role="Congres" Type="Self.Congres" Multiplicity="1" />
+          <End Role="Session" Type="Self.Session" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Congres">
+              <PropertyRef Name="ID_Congres" />
+            </Principal>
+            <Dependent Role="Session">
+              <PropertyRef Name="ID_Congres" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="APP_DBStoreContainer">
+          <EntitySet Name="Administrateur" EntityType="Self.Administrateur" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Comite" EntityType="Self.Comite" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Congres" EntityType="Self.Congres" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Participant" EntityType="Self.Participant" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Participation" EntityType="Self.Participation" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Presentation" EntityType="Self.Presentation" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Session" EntityType="Self.Session" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Autorisation_Admin" EntityType="Self.Autorisation_Admin" store:Type="Tables" store:Schema="dbo">
+            <DefiningQuery>SELECT 
+    [Autorisation_Admin].[ID_Administrateur] AS [ID_Administrateur], 
+    [Autorisation_Admin].[Autorisation] AS [Autorisation]
+    FROM [dbo].[Autorisation_Admin] AS [Autorisation_Admin]</DefiningQuery>
+          </EntitySet>
+          <AssociationSet Name="FK__Autorisat__ID_Ad__37A5467C" Association="Self.FK__Autorisat__ID_Ad__37A5467C">
+            <End Role="Administrateur" EntitySet="Administrateur" />
+            <End Role="Autorisation_Admin" EntitySet="Autorisation_Admin" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Comite__ID_Congr__267ABA7A" Association="Self.FK__Comite__ID_Congr__267ABA7A">
+            <End Role="Congres" EntitySet="Congres" />
+            <End Role="Comite" EntitySet="Comite" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Participa__ID_Pa__31EC6D26" Association="Self.FK__Participa__ID_Pa__31EC6D26">
+            <End Role="Participant" EntitySet="Participant" />
+            <End Role="Participation" EntitySet="Participation" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Participa__ID_Se__32E0915F" Association="Self.FK__Participa__ID_Se__32E0915F">
+            <End Role="Session" EntitySet="Session" />
+            <End Role="Participation" EntitySet="Participation" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Presentat__ID_Se__2C3393D0" Association="Self.FK__Presentat__ID_Se__2C3393D0">
+            <End Role="Session" EntitySet="Session" />
+            <End Role="Presentation" EntitySet="Presentation" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Session__ID_Cong__29572725" Association="Self.FK__Session__ID_Cong__29572725">
+            <End Role="Congres" EntitySet="Congres" />
+            <End Role="Session" EntitySet="Session" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="APP_DB" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="Administrateur">
+          <Key>
+            <PropertyRef Name="ID_Administrateur" />
+          </Key>
+          <Property Name="ID_Administrateur" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Nom" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Prenom" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Email" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Mot_De_Passe" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <NavigationProperty Name="Autorisation_Admin" Relationship="Self.FK__Autorisat__ID_Ad__37A5467C" FromRole="Administrateur" ToRole="Autorisation_Admin" />
+        </EntityType>
+        <EntityType Name="Comite">
+          <Key>
+            <PropertyRef Name="ID_Comite" />
+          </Key>
+          <Property Name="ID_Comite" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="ID_Congres" Type="Int32" Nullable="false" />
+          <Property Name="Nom_Comite" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="President" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <NavigationProperty Name="Congre" Relationship="Self.FK__Comite__ID_Congr__267ABA7A" FromRole="Comite" ToRole="Congres" />
+        </EntityType>
+        <EntityType Name="Congre">
+          <Key>
+            <PropertyRef Name="ID_Congres" />
+          </Key>
+          <Property Name="ID_Congres" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Titre" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Date_Debut" Type="DateTime" Nullable="false" Precision="0" />
+          <Property Name="Date_Fin" Type="DateTime" Nullable="false" Precision="0" />
+          <Property Name="Organisateur" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Lieu" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <NavigationProperty Name="Comites" Relationship="Self.FK__Comite__ID_Congr__267ABA7A" FromRole="Congres" ToRole="Comite" />
+          <NavigationProperty Name="Sessions" Relationship="Self.FK__Session__ID_Cong__29572725" FromRole="Congres" ToRole="Session" />
+        </EntityType>
+        <EntityType Name="Participant">
+          <Key>
+            <PropertyRef Name="ID_Participant" />
+          </Key>
+          <Property Name="ID_Participant" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Nom" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Prenom" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Email" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Mot_De_Passe" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <NavigationProperty Name="Participations" Relationship="Self.FK__Participa__ID_Pa__31EC6D26" FromRole="Participant" ToRole="Participation" />
+        </EntityType>
+        <EntityType Name="Participation">
+          <Key>
+            <PropertyRef Name="ID_Participation" />
+          </Key>
+          <Property Name="ID_Participation" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="ID_Participant" Type="Int32" Nullable="false" />
+          <Property Name="ID_Session" Type="Int32" Nullable="false" />
+          <Property Name="Date_Participation" Type="DateTime" Nullable="false" Precision="0" />
+          <NavigationProperty Name="Participant" Relationship="Self.FK__Participa__ID_Pa__31EC6D26" FromRole="Participation" ToRole="Participant" />
+          <NavigationProperty Name="Session" Relationship="Self.FK__Participa__ID_Se__32E0915F" FromRole="Participation" ToRole="Session" />
+        </EntityType>
+        <EntityType Name="Presentation">
+          <Key>
+            <PropertyRef Name="ID_Presentation" />
+          </Key>
+          <Property Name="ID_Presentation" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="ID_Session" Type="Int32" Nullable="false" />
+          <Property Name="Nom_Conferencier" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Sujet" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <NavigationProperty Name="Session" Relationship="Self.FK__Presentat__ID_Se__2C3393D0" FromRole="Presentation" ToRole="Session" />
+        </EntityType>
+        <EntityType Name="Session">
+          <Key>
+            <PropertyRef Name="ID_Session" />
+          </Key>
+          <Property Name="ID_Session" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="ID_Congres" Type="Int32" Nullable="false" />
+          <Property Name="Nom_Session" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Responsable" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Salle" Type="String" MaxLength="10" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Heure_Debut" Type="Time" Nullable="false" Precision="7" />
+          <Property Name="Heure_Fin" Type="Time" Nullable="false" Precision="7" />
+          <NavigationProperty Name="Congre" Relationship="Self.FK__Session__ID_Cong__29572725" FromRole="Session" ToRole="Congres" />
+          <NavigationProperty Name="Participations" Relationship="Self.FK__Participa__ID_Se__32E0915F" FromRole="Session" ToRole="Participation" />
+          <NavigationProperty Name="Presentations" Relationship="Self.FK__Presentat__ID_Se__2C3393D0" FromRole="Session" ToRole="Presentation" />
+        </EntityType>
+        <EntityType Name="Autorisation_Admin">
+          <Key>
+            <PropertyRef Name="ID_Administrateur" />
+            <PropertyRef Name="Autorisation" />
+          </Key>
+          <Property Name="ID_Administrateur" Type="Int32" Nullable="false" />
+          <Property Name="Autorisation" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <NavigationProperty Name="Administrateur" Relationship="Self.FK__Autorisat__ID_Ad__37A5467C" FromRole="Autorisation_Admin" ToRole="Administrateur" />
+        </EntityType>
+        <Association Name="FK__Autorisat__ID_Ad__37A5467C">
+          <End Role="Administrateur" Type="Self.Administrateur" Multiplicity="1" />
+          <End Role="Autorisation_Admin" Type="Self.Autorisation_Admin" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Administrateur">
+              <PropertyRef Name="ID_Administrateur" />
+            </Principal>
+            <Dependent Role="Autorisation_Admin">
+              <PropertyRef Name="ID_Administrateur" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Comite__ID_Congr__267ABA7A">
+          <End Role="Congres" Type="Self.Congre" Multiplicity="1" />
+          <End Role="Comite" Type="Self.Comite" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Congres">
+              <PropertyRef Name="ID_Congres" />
+            </Principal>
+            <Dependent Role="Comite">
+              <PropertyRef Name="ID_Congres" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Session__ID_Cong__29572725">
+          <End Role="Congres" Type="Self.Congre" Multiplicity="1" />
+          <End Role="Session" Type="Self.Session" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Congres">
+              <PropertyRef Name="ID_Congres" />
+            </Principal>
+            <Dependent Role="Session">
+              <PropertyRef Name="ID_Congres" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Participa__ID_Pa__31EC6D26">
+          <End Role="Participant" Type="Self.Participant" Multiplicity="1" />
+          <End Role="Participation" Type="Self.Participation" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Participant">
+              <PropertyRef Name="ID_Participant" />
+            </Principal>
+            <Dependent Role="Participation">
+              <PropertyRef Name="ID_Participant" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Participa__ID_Se__32E0915F">
+          <End Role="Session" Type="Self.Session" Multiplicity="1" />
+          <End Role="Participation" Type="Self.Participation" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Session">
+              <PropertyRef Name="ID_Session" />
+            </Principal>
+            <Dependent Role="Participation">
+              <PropertyRef Name="ID_Session" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Presentat__ID_Se__2C3393D0">
+          <End Role="Session" Type="Self.Session" Multiplicity="1" />
+          <End Role="Presentation" Type="Self.Presentation" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Session">
+              <PropertyRef Name="ID_Session" />
+            </Principal>
+            <Dependent Role="Presentation">
+              <PropertyRef Name="ID_Session" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="upfconEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="Administrateurs" EntityType="Self.Administrateur" />
+          <EntitySet Name="Comites" EntityType="Self.Comite" />
+          <EntitySet Name="Congres" EntityType="Self.Congre" />
+          <EntitySet Name="Participants" EntityType="Self.Participant" />
+          <EntitySet Name="Participations" EntityType="Self.Participation" />
+          <EntitySet Name="Presentations" EntityType="Self.Presentation" />
+          <EntitySet Name="Sessions" EntityType="Self.Session" />
+          <EntitySet Name="Autorisation_Admin" EntityType="Self.Autorisation_Admin" />
+          <AssociationSet Name="FK__Autorisat__ID_Ad__37A5467C" Association="Self.FK__Autorisat__ID_Ad__37A5467C">
+            <End Role="Administrateur" EntitySet="Administrateurs" />
+            <End Role="Autorisation_Admin" EntitySet="Autorisation_Admin" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Comite__ID_Congr__267ABA7A" Association="Self.FK__Comite__ID_Congr__267ABA7A">
+            <End Role="Congres" EntitySet="Congres" />
+            <End Role="Comite" EntitySet="Comites" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Session__ID_Cong__29572725" Association="Self.FK__Session__ID_Cong__29572725">
+            <End Role="Congres" EntitySet="Congres" />
+            <End Role="Session" EntitySet="Sessions" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Participa__ID_Pa__31EC6D26" Association="Self.FK__Participa__ID_Pa__31EC6D26">
+            <End Role="Participant" EntitySet="Participants" />
+            <End Role="Participation" EntitySet="Participations" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Participa__ID_Se__32E0915F" Association="Self.FK__Participa__ID_Se__32E0915F">
+            <End Role="Session" EntitySet="Sessions" />
+            <End Role="Participation" EntitySet="Participations" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Presentat__ID_Se__2C3393D0" Association="Self.FK__Presentat__ID_Se__2C3393D0">
+            <End Role="Session" EntitySet="Sessions" />
+            <End Role="Presentation" EntitySet="Presentations" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="APP_DBStoreContainer" CdmEntityContainer="upfconEntities">
+          <EntitySetMapping Name="Administrateurs">
+            <EntityTypeMapping TypeName="APP_DB.Administrateur">
+              <MappingFragment StoreEntitySet="Administrateur">
+                <ScalarProperty Name="ID_Administrateur" ColumnName="ID_Administrateur" />
+                <ScalarProperty Name="Nom" ColumnName="Nom" />
+                <ScalarProperty Name="Prenom" ColumnName="Prenom" />
+                <ScalarProperty Name="Email" ColumnName="Email" />
+                <ScalarProperty Name="Mot_De_Passe" ColumnName="Mot_De_Passe" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Comites">
+            <EntityTypeMapping TypeName="APP_DB.Comite">
+              <MappingFragment StoreEntitySet="Comite">
+                <ScalarProperty Name="ID_Comite" ColumnName="ID_Comite" />
+                <ScalarProperty Name="ID_Congres" ColumnName="ID_Congres" />
+                <ScalarProperty Name="Nom_Comite" ColumnName="Nom_Comite" />
+                <ScalarProperty Name="President" ColumnName="President" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Congres">
+            <EntityTypeMapping TypeName="APP_DB.Congre">
+              <MappingFragment StoreEntitySet="Congres">
+                <ScalarProperty Name="ID_Congres" ColumnName="ID_Congres" />
+                <ScalarProperty Name="Titre" ColumnName="Titre" />
+                <ScalarProperty Name="Date_Debut" ColumnName="Date_Debut" />
+                <ScalarProperty Name="Date_Fin" ColumnName="Date_Fin" />
+                <ScalarProperty Name="Organisateur" ColumnName="Organisateur" />
+                <ScalarProperty Name="Lieu" ColumnName="Lieu" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Participants">
+            <EntityTypeMapping TypeName="APP_DB.Participant">
+              <MappingFragment StoreEntitySet="Participant">
+                <ScalarProperty Name="ID_Participant" ColumnName="ID_Participant" />
+                <ScalarProperty Name="Nom" ColumnName="Nom" />
+                <ScalarProperty Name="Prenom" ColumnName="Prenom" />
+                <ScalarProperty Name="Email" ColumnName="Email" />
+                <ScalarProperty Name="Mot_De_Passe" ColumnName="Mot_De_Passe" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Participations">
+            <EntityTypeMapping TypeName="APP_DB.Participation">
+              <MappingFragment StoreEntitySet="Participation">
+                <ScalarProperty Name="ID_Participation" ColumnName="ID_Participation" />
+                <ScalarProperty Name="ID_Participant" ColumnName="ID_Participant" />
+                <ScalarProperty Name="ID_Session" ColumnName="ID_Session" />
+                <ScalarProperty Name="Date_Participation" ColumnName="Date_Participation" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Presentations">
+            <EntityTypeMapping TypeName="APP_DB.Presentation">
+              <MappingFragment StoreEntitySet="Presentation">
+                <ScalarProperty Name="ID_Presentation" ColumnName="ID_Presentation" />
+                <ScalarProperty Name="ID_Session" ColumnName="ID_Session" />
+                <ScalarProperty Name="Nom_Conferencier" ColumnName="Nom_Conferencier" />
+                <ScalarProperty Name="Sujet" ColumnName="Sujet" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Sessions">
+            <EntityTypeMapping TypeName="APP_DB.Session">
+              <MappingFragment StoreEntitySet="Session">
+                <ScalarProperty Name="ID_Session" ColumnName="ID_Session" />
+                <ScalarProperty Name="ID_Congres" ColumnName="ID_Congres" />
+                <ScalarProperty Name="Nom_Session" ColumnName="Nom_Session" />
+                <ScalarProperty Name="Responsable" ColumnName="Responsable" />
+                <ScalarProperty Name="Salle" ColumnName="Salle" />
+                <ScalarProperty Name="Heure_Debut" ColumnName="Heure_Debut" />
+                <ScalarProperty Name="Heure_Fin" ColumnName="Heure_Fin" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Autorisation_Admin">
+            <EntityTypeMapping TypeName="APP_DB.Autorisation_Admin">
+              <MappingFragment StoreEntitySet="Autorisation_Admin">
+                <ScalarProperty Name="ID_Administrateur" ColumnName="ID_Administrateur" />
+                <ScalarProperty Name="Autorisation" ColumnName="Autorisation" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="true" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>

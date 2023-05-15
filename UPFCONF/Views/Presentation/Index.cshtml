@@ -1,0 +1,51 @@
+﻿@model IEnumerable<UPFCONF.Models.Presentation>
+
+@{
+    ViewBag.Title = "Index";
+}
+
+<h2>Index</h2>
+
+<p>
+    @Html.ActionLink("Create New", "Create")
+</p>
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.ID_Presentation)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.ID_Session)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Nom_Conferencier)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Sujet)
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.ID_Presentation)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.ID_Session)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Nom_Conferencier)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Sujet)
+        </td>
+        <td>
+            @Html.ActionLink("Edit", "Edit", new {id=item.ID_Presentation }) |
+            @Html.ActionLink("Details", "Details", new {  id=item.ID_Presentation }) |
+            @Html.ActionLink("Delete", "Delete", new {  id=item.ID_Presentation })
+        </td>
+    </tr>
+}
+
+</table>

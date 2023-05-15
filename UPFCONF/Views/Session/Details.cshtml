@@ -1,0 +1,74 @@
+﻿@model UPFCONF.Models.Session
+
+@{
+    ViewBag.Title = "Details";
+}
+
+<h2>Details</h2>
+
+<div>
+    <h4>Session</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.ID_Session)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.ID_Session)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.ID_Congres)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.ID_Congres)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Nom_Session)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Nom_Session)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Responsable)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Responsable)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Salle)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Salle)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Heure_Debut)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Heure_Debut)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Heure_Fin)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Heure_Fin)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { /* id = Model.PrimaryKey */ }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>

@@ -1,0 +1,50 @@
+﻿@model UPFCONF.Models.Comite
+
+@{
+    ViewBag.Title = "Details";
+}
+
+<h2>Details</h2>
+
+<div>
+    <h4>Comite</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.ID_Comite)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.ID_Comite)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.ID_Congres)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.ID_Congres)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Nom_Comite)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Nom_Comite)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.President)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.President)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Edit", "Edit", new {  id = Model.ID_Comite  }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>

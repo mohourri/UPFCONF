@@ -1,0 +1,45 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>UPF Conferences</title>
+    @Styles.Render("~/Content/css")
+    @Scripts.Render("~/bundles/modernizr")
+</head>
+<body>
+    <div class="navbar navbar-fixed-top navbar-light" style="background-color: #0c095b;color:white;">
+        <div class="container"style="color:white;">
+            <div class="navbar-header">
+                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse" title="more options">
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+                @Html.ActionLink("UPF Conferences", "Index", "Home", new { area = "" }, new { @class = "navbar-brand" })
+            </div>
+            <div class="navbar-collapse collapse">
+                <ul class="nav navbar-nav">
+                    <li>@Html.ActionLink("Congrés", "Index", "Congres")</li>
+                    <li>@Html.ActionLink("Comités", "Index", "Comite")</li>
+                    <li>@Html.ActionLink("Participants", "Index", "Participant")</li>
+                    <li>@Html.ActionLink("Sessions", "Index", "Session")</li>
+                    <li>@Html.ActionLink("Presentations", "Index", "Presentation")</li>
+                    <li>@Html.ActionLink("Participations", "Index", "Participation")</li>
+                </ul>
+            </div>
+        </div>
+    </div>
+    <div class="container body-content">
+        @RenderBody()
+        <hr />
+        <footer>
+            <p>&copy; @DateTime.Now.Year - Crée par Hourri Mohamed et Madouni Youness - tout les droits reservé</p>
+        </footer>
+    </div>
+
+    @Scripts.Render("~/bundles/jquery")
+    @Scripts.Render("~/bundles/bootstrap")
+    @RenderSection("scripts", required: false)
+</body>
+</html>

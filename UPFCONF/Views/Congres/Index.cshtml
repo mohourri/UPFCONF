@@ -1,0 +1,64 @@
+﻿@model IEnumerable<UPFCONF.Models.Congre>
+
+@{
+    ViewBag.Title = "Congrés";
+}
+
+<h2>Congrés</h2>
+
+<p>
+    <a href="@Url.Action("Create")" class="btn btn-primary rounded">Nouveau Congrés</a>
+
+</p>
+<table class="table table-striped">
+    <tr>
+       @* <th>
+            @Html.DisplayNameFor(model => model.ID_Congres)
+        </th>*@
+        <th>
+            Titre
+        </th>
+        <th>
+            Date Debut
+        </th>
+        <th>
+            Date Fin
+        </th>
+        <th>
+            Organisateur
+        </th>
+        <th>
+            Lieu
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        @*<td>
+            @Html.DisplayFor(modelItem => item.ID_Congres)
+        </td>*@
+        <td>
+            @Html.DisplayFor(modelItem => item.Titre)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Date_Debut)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Date_Fin)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Organisateur)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Lieu)
+        </td>
+        <td>
+            <button onclick="location.href='@Url.Action("Edit", new { id = item.ID_Congres })'" class="btn btn-primary">Edit</button>
+            <button onclick="location.href='@Url.Action("Details", new { id = item.ID_Congres })'" class="btn btn-info">Details</button>
+            <button onclick="location.href='@Url.Action("Delete", new { id = item.ID_Congres })'" class="btn btn-danger">Delete</button>
+        </td>
+    </tr>
+}
+
+</table>
